@@ -1,0 +1,16 @@
+server:
+  port: 8082  # Unique port for JobService
+
+spring:
+  application:
+    name: jobservice
+  cloud:
+    consul:
+      discovery:
+        hostname: localhost
+      config:
+        enabled: true
+        prefix: config
+        defaultContext: application
+        profileSeparator: '::'
+        format: YAML

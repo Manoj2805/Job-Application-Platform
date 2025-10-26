@@ -1,0 +1,22 @@
+GET: http://localhost:8089/api/users
+
+GET: http://localhost:8089/api/users/1
+GET: http://localhost:8089/api/users/8
+
+POST: http://localhost:8089/api/users
+
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "role": "APPLICANT"
+}
+
+PUT: http://localhost:8089/api/users/6
+
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "role": "USER"
+}
+DELETE: http://localhost:8089/api/users/6
+DELETE: http://localhost:8089/api/users/61

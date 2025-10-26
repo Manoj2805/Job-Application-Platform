@@ -1,0 +1,39 @@
+server:
+  port: 8089
+
+spring:
+  application:
+    name: gateway
+
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]': # This path pattern applies the config to all routes
+            allowed-origins: "http://localhost:3000"
+            allowed-methods:
+              - GET
+              - POST
+              - PUT
+              - PATCH
+              - DELETE
+              - OPTIONS
+            allowed-headers: "*"
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: UserService
+          uri: lb://userservice
+          predicates:
+            - Path=/api/users/**
+
+        - id: JobService
+          uri: lb://jobservice
+          predicates:
+            - Path=/jobs/**
+
+        - id: ApplicationService
+          uri: lb://applicationservice
+          predicates:
+            - Path=/applications/**

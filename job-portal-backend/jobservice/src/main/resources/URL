@@ -1,0 +1,41 @@
+GET: http://localhost:8089/jobs
+
+// GET : http://localhost:8089/jobs/2
+// GET : http://localhost:8089/jobs/0
+// GET : http://localhost:8089/jobs/10
+
+
+// GET : http://localhost:8089/jobs/user/1
+// GET : http://localhost:8089/jobs/user/0
+// GET : http://localhost:8089/jobs/user/10
+
+// POST http://localhost:8089/jobs
+
+{
+  "title": "Software Engineer",
+  "companyName": "Tech Sol",
+  "location": "Hyderabad",
+  "jobType": "Full-Time",
+  "description": "Responsible for developing and maintaining web applications.",
+  "salary": 80000,
+  "userId": 3
+}
+
+
+// PUT http://localhost:8089/jobs/2
+
+{
+  "title": "Senior Software Engineer",
+  "companyName": "Tech Sol",
+  "location": "Hyderabad",
+  "jobType": "Full-Time",
+  "description": "Responsible for leading development teams and maintaining web applications.",
+  "salary": 120000,
+  "userId": 1
+}
+
+// DELETE http://localhost:8089/jobs/9
+// DELETE http://localhost:8089/jobs/900
+
+
+

@@ -1,0 +1,168 @@
+Consul Services:
+
+TO run the consul the command in the cmd was the consul agent -server -bootstrap-expect=1 -data-dir=consul-data2 -ui -bind=ipaddress of the system(10.68.120.54).Run cmd at the directory of the downloaded file of the consul(C:\Users\dared\Downloads\consul_1.21.5_windows_amd64).
+
+If create the new Project then use the another file to store the application resources like data4,data6 ...etc 
+command :consul agent -server -bootstrap-expect=1 -data-dir=consul-data4 -ui -bind=ipaddress of the system(10.68.120.54). 
+
+The data in the application files are not saved while we create the consul using the below command.
+consul agent -dev
+
+
+In Browser the consul run on the port no: 8500.
+
+Run this Url after executing command in cmd: http://localhost:8500/ui/dc1/kv
+Create the key-value pair in the consul:
+
+config/application/data
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: Manoj@123
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+
+config/applicationservice/data
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/application_db
+
+config/jobservice/data
+
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/job_db
+
+config/userservice/data
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/user_db
+
+
+
+
+
+To Run the swagger
+command:
+http://localhost:8083/swagger-ui/index.html(application Controller ui loaded)
+http://localhost:8082/swagger-ui/index.html(job Controller ui loaded)
+http://localhost:8081/swagger-ui/index.html(User Controller Ui loaded)
+
+
+To Run the MySQL server:
+Command: mysqld --console
+open cmd in another tab: mysql -u root -p
+password: Manoj@123
+
+Total Three Databases are created in it.
+
+mysql> use application_db;
+Database changed
+mysql> select * from  applications;
++----+---------+--------+----------+--------------+
+| id | user_id | job_id | status   | applied_date |
++----+---------+--------+----------+--------------+
+|  2 |       3 |      2 | APPROVED | 2025-10-12   |
+|  3 |       1 |      3 | APPLIED  | 2025-10-12   |
+|  5 |       1 |      2 | REJECTED | 2025-10-13   |
+|  7 |       1 |      1 | ACCEPTED | 2025-10-15   |
+| 10 |       7 |      1 | ACCEPTED | 2025-10-15   |
+| 11 |       1 |      9 | APPLIED  | 2025-10-26   |
+| 12 |       1 |     10 | APPLIED  | 2025-10-26   |
++----+---------+--------+----------+--------------+
+7 rows in set (0.00 sec)
+
+mysql> desc applications;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id           | bigint       | NO   | PRI | NULL    | auto_increment |
+| user_id      | bigint       | NO   |     | NULL    |                |
+| job_id       | bigint       | NO   |     | NULL    |                |
+| status       | varchar(255) | NO   |     | NULL    |                |
+| applied_date | date         | YES  |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+
+
+mysql> use user_db;
+Database changed
+mysql> desc users;
++-------+--------------+------+-----+---------+----------------+
+| Field | Type         | Null | Key | Default | Extra          |
++-------+--------------+------+-----+---------+----------------+
+| id    | bigint       | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(255) | NO   |     | NULL    |                |
+| email | varchar(255) | NO   | UNI | NULL    |                |
+| role  | varchar(255) | YES  |     | NULL    |                |
++-------+--------------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)
+
+mysql> select * from users;
++----+---------------------+---------------------+------------+
+| id | name                | email               | role       |
++----+---------------------+---------------------+------------+
+|  1 | Manoj Reddy         | manoj@example.com   | USER       |
+|  2 | Alice Johnson       | alice@example.com   | RECRUITER  |
+|  3 | Bob Smith           | bob@example.com     | USER       |
+|  6 | MANOJ REDDY DAREDDY | koushik45@gmail.com | JOB_SEEKER |
+|  7 | Rohith              | Rohith@gmail.com    | CANDIDATE  |
+| 10 | Virat Kohil         | Virat@gmail.com     | RECRUITER  |
+| 11 | Sachin              | sachin@gmail.com    | RECRUITER  |
++----+---------------------+---------------------+------------+
+
+
+mysql> use job_db;
+Database changed
+mysql> select * from jobs;
++----+----------------------+---------------+--------------------------------------------------------------+----------------------------+---------+--------------+-----------+-----------+
+| id | title                | company       | description                                                  | location                   | salary  | company_name | job_type  | posted_by |
++----+----------------------+---------------+--------------------------------------------------------------+----------------------------+---------+--------------+-----------+-----------+
+|  1 | Java Developer       | Acme Corp     | Backend development using Java and Spring Boot               | Hyderabad                  |   50000 | NULL         | NULL      |      NULL |
+|  2 | Frontend Developer   | TechSolutions | Frontend development using React and Angular                 | Bangalore                  |   55000 | NULL         | Full-Time |         2 |
+|  3 | Full Stack Developer | InnovateX     | Full stack development with Java & React                     | Chennai                    |   60000 | NULL         | NULL      |      NULL |
+|  4 | Java Developer       | Cognizant     | Develop and maintain backend microservices.                  | Hyderabad                  |  850000 | NULL         | Full-Time |         1 |
+|  5 | se                   | sdafa         | sfafs                                                        | safd                       |   22334 | NULL         | Full-time |         2 |
+|  6 | Deveops Enginerring  | Infosys       | CI/Cd pipelines,Docker                                       | Hyderabad, Telangana       |   35000 | NULL         | Full-time |         2 |
+|  7 | Machine-Learning     | Google        | The Ml Learning and it's Model Training.                     | Hyderabad, Telangana       |   34998 | NULL         | Full-time |         2 |
+|  8 | Software Engineer    | Tech Sol      | Responsible for developing and maintaining web applications. | Hyderabad                  |   80000 | NULL         | Full-Time |         3 |
+|  9 | Deveops Engineering  | Infosys       | CI/CD pipelines,Kubernetes,Docker.                           | Hyderabad, Andhra Pradesh  |  230000 | NULL         | Full-time |         2 |
+| 10 | ML Engineering       | Infosys       | Machine Learning Algorithms                                  | New York                   | 2300000 | NULL         | Full-time |         2 |
++----+----------------------+---------------+--------------------------------------------------------------+----------------------------+---------+--------------+-----------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> desc jobs;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id           | bigint       | NO   | PRI | NULL    | auto_increment |
+| title        | varchar(150) | NO   |     | NULL    |                |
+| company      | varchar(150) | NO   |     | NULL    |                |
+| description  | text         | YES  |     | NULL    |                |
+| location     | varchar(150) | YES  |     | NULL    |                |
+| salary       | double       | YES  |     | NULL    |                |
+| company_name | varchar(255) | YES  |     | NULL    |                |
+| job_type     | varchar(255) | YES  |     | NULL    |                |
+| posted_by    | bigint       | YES  |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+9 rows in set (0.00 sec)
+
+In Backend Microservices run on the different port numbers.
+
+Userservice(port no :8081)
+jobservice(port no : 8082)
+applicationservice(port no : 8083)
+gateway(port no : 8089)
+
+Frontend application Run on port no :(3000)
+
+
+MySQL database run on port no:(3306).
+
+
